@@ -279,7 +279,15 @@
   }
 
   function fillFaceboxFromAjax(href, klass) {
-    $.get(href, function(data) { $.facebox.reveal(data, klass) })
+	var addparam = $.facebox.settings.addparam;
+	if ( addparam != null ) {
+		if (href.match(/\?/)) {
+			href = href + "&" + addparam + "=true";
+		} else {
+			href = href + "?" + addparam + "=true";
+		}
+	}
+	$.get(href, function(data) { $.facebox.reveal(data, klass) })
   }
 
   function skipOverlay() {
